@@ -13,7 +13,6 @@ public class RaspberryLimited {
 
     @OneToOne(optional = false)
     @JoinColumn(name = "user_id")
-    //@Column(nullable = false)
     private User user;
 
     private Float temMax;

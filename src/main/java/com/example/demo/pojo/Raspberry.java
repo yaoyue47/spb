@@ -16,6 +16,7 @@ public class Raspberry {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    @Column(unique = true,nullable = false)
     private String name;
 
     private String status;
@@ -24,7 +25,6 @@ public class Raspberry {
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "user_id")
-    //@Column(nullable = false)
     private User user;
 
     @OneToMany(mappedBy = "raspberry",cascade=CascadeType.ALL)
