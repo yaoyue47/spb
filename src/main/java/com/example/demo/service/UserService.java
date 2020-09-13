@@ -1,8 +1,9 @@
 package com.example.demo.service;
 
-import org.springframework.stereotype.Service;
+import com.example.demo.pojo.User;
 
-@Service
-public class UserService {
+import java.util.Map;
 
+public interface UserService {
+    int create(Map<String,String> user);
 }
