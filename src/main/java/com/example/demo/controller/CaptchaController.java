@@ -19,7 +19,7 @@ public class CaptchaController {
         response.setDateHeader("Expire", 0);
         Captcha captcha = new Captcha();
         captcha.getRandCode(request, response);
-        System.out.println(request.getSession().getAttribute("CAPTCHA"));
+        //System.out.println(request.getSession().getAttribute("CAPTCHA"));
     }
 
 

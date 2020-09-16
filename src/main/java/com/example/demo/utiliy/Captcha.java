@@ -14,7 +14,7 @@ public class Captcha {
     /**
      * 随机产生数字与字母组合的字符串
      */
-    private String randString = "0123456789abcdefghijklmnopqrstuvwxyz";
+    private String randString = "123456789abcdefghijklmnopqrstuvwxyz";
 
     /**
      * 图片宽
