@@ -22,7 +22,7 @@ public class IndexController {
 
     @GetMapping("/home")
     public ModelAndView home(Model model, HttpServletRequest request){
-        System.out.println(request.getSession().getAttribute("status"));
+        //System.out.println(request.getSession().getAttribute("status"));
         return new ModelAndView("home");
     }
 }

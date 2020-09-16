@@ -18,11 +18,14 @@ public class LoginController {
             @RequestParam(value = "check") String check,
             HttpServletRequest request
             ){
-        request.getSession().setAttribute("status",true);
+        request.getSession().setAttribute("status","true");
         request.getSession().setAttribute("user",user);
         if (check.equals("on")){
             request.getSession().setMaxInactiveInterval(30*60);
+        }else {
+            request.getSession().setMaxInactiveInterval(0);
         }
+        //System.out.println(request.getSession().getMaxInactiveInterval());
         return "redirect:/home";
     }
 
