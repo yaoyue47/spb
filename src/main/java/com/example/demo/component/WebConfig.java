@@ -9,8 +9,12 @@ public class WebConfig implements WebMvcConfigurer {
     @Autowired
     Filter filter;
 
+    @Autowired
+    Filterindex filterindex;
+
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(filter).addPathPatterns("/home");
+        registry.addInterceptor(filterindex).addPathPatterns("/");
     }
 }

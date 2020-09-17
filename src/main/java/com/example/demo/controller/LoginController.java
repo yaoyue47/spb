@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 @Controller
 public class LoginController {
@@ -25,8 +27,13 @@ public class LoginController {
         }else {
             request.getSession().setMaxInactiveInterval(0);
         }
-        //System.out.println(request.getSession().getMaxInactiveInterval());
         return "redirect:/home";
     }
 
+    @PostMapping("/api/logout")
+    public void logout(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        request.getSession().removeAttribute("status");
+        response.sendRedirect("/");
+
+    }
 }

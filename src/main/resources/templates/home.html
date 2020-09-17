@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>分布式监测信息管理平台</title>
     <meta charset="utf-8">
     <!--<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">-->
     <!--上面为移动端的解决方案-->
 
-    <link rel="shortcut icon" href="/static/shumeipai/fly.ico"/>
+    <link rel="shortcut icon" href="/shumeipai/fly.ico"/>
     <!--ico引入-->
 
     <!-- 新 Bootstrap4 核心 CSS 文件 -->
@@ -21,23 +21,23 @@
     <script src="https://cdn.bootcss.com/echarts/4.3.0-rc.1/echarts-en.common.js"></script>
     <!--以上为echats的js-->
 
-    <link rel="stylesheet" href="/static/shumeipai/home/tabs-basic.css">
-    <script type="text/javascript" src="/static/shumeipai/home/tabs.js"></script>
+    <link rel="stylesheet" href="/shumeipai/home/tabs-basic.css">
+    <script type="text/javascript" src="/shumeipai/home/tabs.js"></script>
     <!--以上为tab选项卡的js-->
 
-    <link rel="stylesheet" href="/static/shumeipai/home/myPagination.css">
-    <script type="text/javascript" src="/static/shumeipai/home/myPagination.js"></script>
-    <script type="text/javascript" src="/static/shumeipai/home/Pagination.js"></script>
+    <link rel="stylesheet" href="/shumeipai/home/myPagination.css">
+    <script type="text/javascript" src="/shumeipai/home/myPagination.js"></script>
+    <script type="text/javascript" src="/shumeipai/home/Pagination.js"></script>
     <!--以上为按钮组的js引入-->
 
 
     <!--<script type="text/javascript" src="searchdata.js"></script>-->
     <!-- 查询搜索数据的js-->
 
-    <script type="text/javascript" src="/static/shumeipai/home/getdata.js"></script>
+    <script type="text/javascript" src="/shumeipai/home/getdata.js"></script>
     <!--查询表格数据-->
 
-    <script type="text/javascript" src="/static/shumeipai/home/getechartsdata.js"></script>
+    <script type="text/javascript" src="/shumeipai/home/getechartsdata.js"></script>
     <!--查询图表数据-->
 
 </head>
@@ -163,7 +163,7 @@
 
         <div>
             <h1 style="float: left;margin:0">
-                <img src="/static/shumeipai/logo.png" style="width:8%">
+                <img src="/shumeipai/logo.png" style="width:8%">
                 监测信息管理平台</h1>
             <h5 style="float: right;margin-top: 2%;margin-bottom: 0px" class="text-muted">在此搜索指定日期</h5>
             <div style="clear: both;"></div>
@@ -174,7 +174,7 @@
             <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown"
                     aria-haspopup="true"
                     aria-expanded="false">
-                {{ shumeipai_now }}
+                <span th:text="${message.raspberryNow}"></span>
             </button>
             <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
                 {% for i  in shumeipai %}
@@ -186,7 +186,6 @@
                 {% endfor %}
                 <div class="dropdown-divider"></div>
                 <form action="api/configure/" method="post">
-                    {% csrf_token %}
                     <input name="user" value="{{ user }}" type="hidden">
                     <button class="dropdown-item" type="submit">修改配置</button>
                 </form>
@@ -195,12 +194,10 @@
             <button type="submit" class="btn btn-secondary ml-3" onclick="baojing()">告警设置</button>
 
             <form method="post" action="api/logout/" style="display: inline">
-                {% csrf_token %}
                 <button type="submit" class="btn btn-secondary ml-3">登出</button>
             </form>
 
             <form action="api/search/" method="post" style="display: inline">
-                {% csrf_token %}
                 <div class="input-group" style="width: 400px;float: right;">
                     <input type="date" class="form-control" id="input_date" name="input_date">
                     <div class="input-group-append">
@@ -218,10 +215,10 @@
 
 <div class="container mt-4 text-muted">
     <div class="container shadow p-3 mt-3 bg-white " style="border-radius: 15px;">
-        <h6>当前登录用户 : {{ user }}</h6>
+        <h6 th:text="'当前登录用户 : '+${message.user}"></h6>
         <h6>当前节点IP : 2001:250:5405:14:cd54:4370:4e99:634c</h6>
         <h6>当前节点MAC : 18-66-DA-E5-EC-48</h6>
-        <h6>本站点击次数 : {{ click_time }} 点击</h6>
+        <h6 th:text="'本站点击次数 : '+${message.clickTime}+'点击'"></h6>
     </div>
 </div>
 

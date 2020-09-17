@@ -85,4 +85,10 @@ class DemoApplicationTests {
     void adwafafvav(){
         System.out.println(RaspberryDao.findById(5).getUser());
     }
+
+
+    @Test
+    void adw(){
+        System.out.println(systemInfoDao.findById(1));
+    }
 }
