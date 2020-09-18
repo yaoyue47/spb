@@ -2,6 +2,7 @@ package com.example.demo;
 
 import com.example.demo.dao.*;
 import com.example.demo.pojo.*;
+import com.example.demo.service.MainDataServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -21,6 +22,9 @@ class DemoApplicationTests {
     MainDataDao mainDataDao;
     @Autowired
     SystemInfoDao systemInfoDao;
+
+    @Autowired
+    MainDataServiceImpl mainDataService;
 
     @Test
     void contextLoads() {
@@ -90,5 +94,14 @@ class DemoApplicationTests {
     @Test
     void adw(){
         System.out.println(systemInfoDao.findById(1));
+    }
+
+    @Test
+    void awfavsdvsd(){
+        List<MainData> mainDataExcel = mainDataService.getMainDataExcel(0, "124");
+        for (MainData mainDataExcel1:mainDataExcel){
+            System.out.println(mainDataExcel1);
+        }
+
     }
 }

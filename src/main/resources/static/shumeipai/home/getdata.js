@@ -1,6 +1,6 @@
 function getdata(num,wendu_or_shidu){
-	url = "api/get_excel_data/?page="+num +"&shumeipai_name="+shumeipai_name
-	$.post(url,{
+	url = "api/getExcelData/?page="+num +"&raspberry="+shumeipai_name
+	$.get(url,{
 
 		},function(data,status){
 				if(wendu_or_shidu==="wendu"){
