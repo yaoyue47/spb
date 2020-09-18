@@ -58,7 +58,7 @@
                 <h3>欢迎使用本系统!</h3>
                 <br>
                 <h5>当前登录用户:
-                    <mark>{{ user }}</mark>
+                    <mark th:text="${message.user}"></mark>
                 </h5>
             </div>
             <!-- 模态框底部 -->
@@ -178,9 +178,8 @@
             </button>
             <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
                 <div th:each="item:${message.raspberry}">
-<!--                    todo-->
-                    <a class="dropdown-item active" href="?raspberry={{ i }}" th:if="${item == message.raspberryNow}" th:text="${item}"></a>
-                    <a class="dropdown-item" href="?raspberry={{ i }}" th:if="${item != message.raspberryNow}" th:text="${item}"></a>
+                    <a class="dropdown-item active" th:href="@{'?raspberry='+${item}}" th:if="${item == message.raspberryNow}" th:text="${item}"></a>
+                    <a class="dropdown-item" th:href="@{'?raspberry='+${item}}" th:if="${item != message.raspberryNow}" th:text="${item}"></a>
                 </div>
                 <div class="dropdown-divider"></div>
                 <form action="api/configure/" method="post">
@@ -495,17 +494,17 @@
 </body>
 
 <script type="text/javascript">
-    if (window.location.search == '') {
+    if (window.location.search === '') {
         $("#myModal").modal("show");
     }
 
-    var shumeipai_name_list =
-        {
-    {
-        shumeipai | safe
-    }
-    }
-    var shumeipai_name = '{{ shumeipai_now|safe }}'
+    // var shumeipai_name_list =
+    //     {
+    // {
+    //     shumeipai | safe
+    // }
+    // }
+    var shumeipai_name = "[[${message.raspberryNow}]]";
 
     getdata(1, "wendu");
     getdata(1, "shidu");
@@ -533,13 +532,7 @@
         $("#myModal_baojing").modal("show");
     }
 
-    document.getElementById("customSwitch1").checked = {
-    {
-        switch
-            |
-                lower
-    }
-    }
+    document.getElementById("customSwitch1").checked = true;
     checkbox()
 
     function checkbox() {

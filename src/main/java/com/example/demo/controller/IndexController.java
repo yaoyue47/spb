@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -33,7 +34,7 @@ public class IndexController {
     }
 
     @GetMapping("/home")
-    public ModelAndView home(Model model,HttpServletRequest request){
+    public ModelAndView home(Model model, HttpServletRequest request, @RequestParam(value = "raspberry",required = false) String raspberry) {
         HomeMessage homeMessage = new HomeMessage();
 
         homeMessage.setUser((String) request.getSession().getAttribute("user"));
@@ -44,10 +45,13 @@ public class IndexController {
 
         List<String> list = raspberryServiceImpl.getList((String) request.getSession().getAttribute("user"));
         homeMessage.setRaspberry(list);
+        if(raspberry ==null){
+            homeMessage.setRaspberryNow(list.get(0));
+        }else {
+            homeMessage.setRaspberryNow(raspberry);
+        }
 
-        homeMessage.setRaspberryNow(list.get(0));
-
-        model.addAttribute("message",homeMessage);
+        model.addAttribute("message", homeMessage);
         return new ModelAndView("home");
     }
 }
