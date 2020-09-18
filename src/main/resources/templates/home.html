@@ -177,16 +177,14 @@
                 <span th:text="${message.raspberryNow}"></span>
             </button>
             <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-                {% for i  in shumeipai %}
-                    {% if i  == shumeipai_now %}
-                        <a class="dropdown-item active" href="?raspberry={{ i }}">{{ i }}</a>
-                    {% else %}
-                        <a class="dropdown-item" href="?raspberry={{ i }}">{{ i }}</a>
-                    {% endif %}
-                {% endfor %}
+                <div th:each="item:${message.raspberry}">
+<!--                    todo-->
+                    <a class="dropdown-item active" href="?raspberry={{ i }}" th:if="${item == message.raspberryNow}" th:text="${item}"></a>
+                    <a class="dropdown-item" href="?raspberry={{ i }}" th:if="${item != message.raspberryNow}" th:text="${item}"></a>
+                </div>
                 <div class="dropdown-divider"></div>
                 <form action="api/configure/" method="post">
-                    <input name="user" value="{{ user }}" type="hidden">
+                    <input name="user" th:value="${message.user}" type="hidden">
                     <button class="dropdown-item" type="submit">修改配置</button>
                 </form>
             </div>
@@ -502,7 +500,11 @@
     }
 
     var shumeipai_name_list =
-    {{shumeipai|safe}}
+        {
+    {
+        shumeipai | safe
+    }
+    }
     var shumeipai_name = '{{ shumeipai_now|safe }}'
 
     getdata(1, "wendu");
@@ -531,8 +533,14 @@
         $("#myModal_baojing").modal("show");
     }
 
-    document.getElementById("customSwitch1").checked = {{ switch|lower }}
-        checkbox()
+    document.getElementById("customSwitch1").checked = {
+    {
+        switch
+            |
+                lower
+    }
+    }
+    checkbox()
 
     function checkbox() {
         array = ['tem_max', 'tem_min', 'hum_max', 'hum_min', 'ph_max', 'ph_min', 'sun_max', 'sun_min', 'email']
